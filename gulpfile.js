@@ -14,12 +14,12 @@ var config = {
     devBaseUrl: 'http://localhost',
     paths: {
         html: './src/*.html',
-        js: './src/**/*.js',
+        jsx: './src/**/*.jsx',
         css: ['./node_modules/bootstrap/dist/css/bootstrap.min.css',
             './node_modules/bootstrap/dist/css/bootstrap-theme.min.css'
         ],
         dist: './dist',
-        mainJs: './src/main.js'
+        mainJs: './src/main.jsx'
     }
 };
 
@@ -44,8 +44,8 @@ gulp.task('html', function() {
         .pipe(connect.reload());
 });
 
-gulp.task('js', function() {
-    browserify(config.paths.mainJs)
+gulp.task('jsx', function() {
+    browserify(config.paths.mainJs, { "extensions": [".jsx"] })
         .transform("babelify", { presets: ["env", "react"] })
         .bundle()
         .on('error', console.error.bind(console))
@@ -61,14 +61,14 @@ gulp.task('css', function() {
 });
 
 gulp.task('lint', function() {
-    return gulp.src(config.paths.js)
+    return gulp.src(config.paths.jsx)
         .pipe(lint('eslint.config.json'))
         .pipe(lint.format());
 });
 
 gulp.task('watch', function() {
     gulp.watch(config.paths.html, ['html']);
-    gulp.watch(config.paths.js, ['js', 'lint']);
+    gulp.watch(config.paths.jsx, ['jsx', 'lint']);
 });
 
-gulp.task('default', ['html', 'js', 'css', 'lint', 'open', 'watch']);
+gulp.task('default', ['html', 'jsx', 'css', 'lint', 'open', 'watch']);
