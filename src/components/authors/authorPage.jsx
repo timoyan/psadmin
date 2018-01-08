@@ -2,6 +2,7 @@
 
 import React from 'react';
 import AuthorApi from '../../api/authorApi';
+import AuthorList from './authorList';
 
 class Authors extends React.Component {
     constructor(props) {
@@ -9,7 +10,7 @@ class Authors extends React.Component {
         this.state = { authors: [] };
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.setState({ authors: AuthorApi.getAllAuthors() });
     }
 
@@ -26,18 +27,7 @@ class Authors extends React.Component {
         return (
             <div>
                 <h1>Authors</h1>
-
-                <table className="table">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.state.authors.map(createAuthorRow, this)}
-                    </tbody>
-                </table>
+                <AuthorList authors={this.state.authors} />          
             </div>
         );
     }
