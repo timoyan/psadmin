@@ -1,19 +1,20 @@
 "use strict";
 
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 class Header extends React.Component {
     render() {
         return (
             <nav className="navbar navbar-default">
                 <div className="container-fluid">
-                    <a href="/" className="navbar-brand">
+                    <Link to="/" className="navbar-brand">
                         <img src="images/react.png" alt="" height="100%" />
-                    </a>
+                    </Link>
                     <ul className="nav navbar-nav">
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/#authors">Authors</a></li>
-                        <li><a href="/#about">About</a></li>
+                        <li><Link to="/">Home</Link></li>
+                        <li><Link to="/authors">Authors</Link></li>
+                        <li><Link to="/about">About</Link></li>
                     </ul>
                 </div>
             </nav>

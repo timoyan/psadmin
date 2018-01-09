@@ -8,6 +8,7 @@ var babelify = require('babelify');
 var source = require('vinyl-source-stream');
 var concat = require('gulp-concat');
 var lint = require('gulp-eslint');
+var history = require('connect-history-api-fallback');
 
 var config = {
     port: 9005,
@@ -30,7 +31,10 @@ gulp.task('connect', function() {
         root: ['dist'],
         port: config.port,
         base: config.devBaseUrl,
-        livereload: true
+        livereload: true,
+        middleware: function(connect, opt) {
+            return [history()];
+        },
     });
 });
 

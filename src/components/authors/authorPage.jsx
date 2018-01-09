@@ -15,15 +15,6 @@ class Authors extends React.Component {
     }
 
     render() {
-        var createAuthorRow = function (author) {
-            return (
-                <tr key={author.id}>
-                    <td><a href={"/#authors/" + author.id}>{author.id}</a></td>
-                    <td>{author.firstName} {author.lastName}</td>
-                </tr>
-            );
-        };
-
         return (
             <div>
                 <h1>Authors</h1>

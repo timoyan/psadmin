@@ -1,40 +1,14 @@
-global.jQuery = global.$ = require('jquery');
+"use strict";
 
 import React from 'react';
-import ReactDOM from 'react-dom';
-import Home from './components/homePage';
-import Authors from './components/authors/authorPage'
-import About from './components/about/aboutPage';
-import Header from './components/common/header';
+import { render } from 'react-dom';
+import { BrowserRouter} from 'react-router-dom';
+import App from './components/app';
 
-(function (win) {
-    "use strict";
-    class App extends React.Component {
-        render() {
-            var Child;
-
-            switch (this.props.route) {
-                case 'about': Child = About; break;
-                case 'authors': Child = Authors; break;
-                default: Child = Home;
-            }
-
-            return (
-                <div>
-                    <Header />
-                    <Child />
-                </div>
-            );
-        }
-    }
-
-    function render() {
-        var route = win.location.hash.substr(1);
-        win.console.log(route);
-        ReactDOM.render(<App route={route} />, document.getElementById('app'));
-    }
-
-    win.addEventListener('hashchange', render);
-    render();
-
-})(window);
+render(
+    (
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+    ), document.getElementById('app')
+);
