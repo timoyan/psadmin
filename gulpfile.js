@@ -1,6 +1,7 @@
 "use strict";
 
 var gulp = require('gulp');
+var compression = require('compression');
 var connect = require('gulp-connect'); //Runs a local dev server
 var open = require('gulp-open'); //Open a URL in a web browser
 var browserify = require('browserify');
@@ -18,7 +19,8 @@ var config = {
         jsx: './src/**/*.jsx',
         images: './src/images/*',
         css: ['./node_modules/bootstrap/dist/css/bootstrap.min.css',
-            './node_modules/bootstrap/dist/css/bootstrap-theme.min.css'
+            './node_modules/bootstrap/dist/css/bootstrap-theme.min.css',
+            './node_modules/toastr/build/toastr.min.css'
         ],
         dist: './dist',
         mainJs: './src/main.jsx'
@@ -33,7 +35,10 @@ gulp.task('connect', function() {
         base: config.devBaseUrl,
         livereload: true,
         middleware: function(connect, opt) {
-            return [history()];
+            return [
+                compression(),
+                history()
+            ];
         },
     });
 });

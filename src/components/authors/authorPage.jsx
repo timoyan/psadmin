@@ -3,6 +3,7 @@
 import React from 'react';
 import AuthorApi from '../../api/authorApi';
 import AuthorList from './authorList';
+import { Prompt, Link } from 'react-router-dom';
 
 class Authors extends React.Component {
     constructor(props) {
@@ -18,7 +19,8 @@ class Authors extends React.Component {
         return (
             <div>
                 <h1>Authors</h1>
-                <AuthorList authors={this.state.authors} />          
+                <Link to="/authors/add" className="btn btn-default">Add Author</Link>
+                <AuthorList authors={this.state.authors} />
             </div>
         );
     }
