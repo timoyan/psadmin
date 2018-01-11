@@ -2,7 +2,8 @@
 
 import React from 'react';
 import AuthorForm from './authorForm';
-import AuthorApi from '../../api/authorApi';
+import AuthorActions from '../../actions/authorActions';
+import AuthorStore from '../../stores/authorStore';
 import { Router, Prompt } from 'react-router-dom';
 import Toastr from 'toastr';
 
@@ -20,7 +21,7 @@ class ManageAuthorPage extends React.Component {
         const authorId = this.props.match.params.id;
 
         if (authorId) {
-            this.setState({ author: AuthorApi.getAuthorById(authorId) });
+            this.setState({ author: AuthorStore.getAuthorById(authorId) });
         }
     }
 
@@ -60,7 +61,7 @@ class ManageAuthorPage extends React.Component {
                 return;
             }
 
-            AuthorApi.saveAuthor(this.state.author);
+            AuthorActions.createAuthor(this.state.author);
             Toastr.success('Author saved.');
             this.props.history.push('/authors');
         });

@@ -1,8 +1,8 @@
 "use strict";
 
 import React from 'react';
-import AuthorApi from '../../api/authorApi';
 import AuthorList from './authorList';
+import AuthorStore from '../../stores/authorStore';
 import { Prompt, Link } from 'react-router-dom';
 
 class Authors extends React.Component {
@@ -12,7 +12,7 @@ class Authors extends React.Component {
     }
 
     componentDidMount() {
-        this.setState({ authors: AuthorApi.getAllAuthors() });
+        this.setState({ authors: AuthorStore.getAllAuthors() });
     }
 
     render() {
