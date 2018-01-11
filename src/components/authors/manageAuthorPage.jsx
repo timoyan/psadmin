@@ -53,16 +53,17 @@ class ManageAuthorPage extends React.Component {
     }
 
     saveAuthor(event) {
-        this.setState({ dirty: false });
         event.preventDefault();
 
-        if (!this.authorFormIsValid()) {
-            return;
-        }
+        this.setState({ dirty: false }, () => {
+            if (!this.authorFormIsValid()) {
+                return;
+            }
 
-        AuthorApi.saveAuthor(this.state.author);
-        Toastr.success('Author saved.');
-        this.props.history.push('/authors');
+            AuthorApi.saveAuthor(this.state.author);
+            Toastr.success('Author saved.');
+            this.props.history.push('/authors');
+        });
     }
 
     render() {
