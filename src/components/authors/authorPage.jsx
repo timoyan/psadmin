@@ -11,7 +11,19 @@ class Authors extends React.Component {
         this.state = { authors: [] };
     }
 
+    componentWillMount(){
+        AuthorStore.addChangeListener(this._onChange.bind(this));
+    }
+
+    componentWillUnmount(){
+        AuthorStore.removeChangeListener(this._onChange.bind(this));
+    }
+
     componentDidMount() {
+        this.setState({ authors: AuthorStore.getAllAuthors() });
+    }
+
+    _onChange() {
         this.setState({ authors: AuthorStore.getAllAuthors() });
     }
 

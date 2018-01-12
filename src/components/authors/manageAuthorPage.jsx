@@ -61,7 +61,12 @@ class ManageAuthorPage extends React.Component {
                 return;
             }
 
-            AuthorActions.createAuthor(this.state.author);
+            if (this.state.author.id) {
+                AuthorActions.updateAuthor(this.state.author)
+            } else {
+                AuthorActions.createAuthor(this.state.author);
+            }
+
             Toastr.success('Author saved.');
             this.props.history.push('/authors');
         });
